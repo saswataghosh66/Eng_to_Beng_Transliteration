@@ -208,7 +208,6 @@ After conducting approximately 15 hyperparameter sweeps, we identified a model c
  - batch_size = 16
  - num_epochs = 35
  - dropout = 0.2
- - beam_width= 5
  - learning_rate = 0.0001
  - bidirectional = True
 
