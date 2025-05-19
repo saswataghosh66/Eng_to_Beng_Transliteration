@@ -226,6 +226,7 @@ Subsequently, we extended the training of this model to 35 epochs, observing the
          - ✅ Above 50%: 1580
          - ✅ Above 25%: 1869
          - ❌ ≤ 25% Match: 2154
+
  So, based on this, the exact word-level accuracy is approximately 21.9% (2024 out of 9228 words were perfectly predicted).
 
 
