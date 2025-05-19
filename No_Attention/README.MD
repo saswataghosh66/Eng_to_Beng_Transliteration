@@ -62,28 +62,37 @@ The function returns the prepared dataset and dataloader along with the vocabula
 **Step 6:**
 
 - TextEncoder class:
+
   Defines the encoder module with an embedding layer and an RNN (LSTM/GRU/RNN). It supports multiple layers, dropout, and optional bidirectionality. Takes input 
   sequences and outputs hidden states.
 
 Decoder class:
-Defines the decoder module with an embedding layer, an RNN, and a linear layer to map hidden states to output vocabulary scores. It processes one step at a time, taking previous token and hidden state as input.
+
+  Defines the decoder module with an embedding layer, an RNN, and a linear layer to map hidden states to output vocabulary scores. It processes one step at a time, 
+  taking previous token and hidden state as input.
 
 Seq2SeqModel class:
-Combines the encoder and decoder into a sequence-to-sequence model. Handles initialization of decoder hidden states, runs teacher forcing during training, and supports beam search decoding for inference.
 
-_init_decoder_hidden: Adapts encoder hidden states to decoder's format, handling bidirectional RNNs and LSTM's cell states.
+  Combines the encoder and decoder into a sequence-to-sequence model. Handles initialization of decoder hidden states, runs teacher forcing during training, and 
+  supports beam search decoding for inference.
 
-_merge_bidirectional: Combines forward and backward hidden states by summation.
+- _init_decoder_hidden:  Adapts encoder hidden states to decoder's format, handling bidirectional RNNs and LSTM's cell states.
 
-_pad_or_trim: Adjusts hidden state tensor size to match decoder layers.
+- _merge_bidirectional:  Combines forward and backward hidden states by summation.
 
-beam_search_decode: Implements beam search decoding for generating sequences with better search than greedy decoding.
+- _pad_or_trim:  Adjusts hidden state tensor size to match decoder layers.
 
-train_model function:
-Trains the Seq2Seq model for one epoch over the data loader. Performs forward pass, computes loss, backpropagation, and optimizer step. Returns updated model and average training loss.
+- beam_search_decode:  Implements beam search decoding for generating sequences with better search than greedy decoding.
 
-evaluate_model function:
-Evaluates the model on validation/test data without teacher forcing. Computes loss and token-level accuracy excluding padding tokens. Returns average loss and accuracy percentage.
+- train_model function:
+
+    Trains the Seq2Seq model for one epoch over the data loader. Performs forward pass, computes loss, backpropagation, and optimizer step. Returns updated model 
+    and average training loss.
+
+- evaluate_model function:
+
+    Evaluates the model on validation/test data without teacher forcing. Computes loss and token-level accuracy excluding padding tokens. Returns average loss and 
+    accuracy percentage.
  
 
 
