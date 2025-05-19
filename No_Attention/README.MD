@@ -40,5 +40,8 @@ These tensors are wrapped into a TensorDataset and a DataLoader, making them rea
 
 - The maximum lengths of the input and target sequences.
 
+**Step 3:**
+ Loaded traiining data from traiining data path.
+
 
 
