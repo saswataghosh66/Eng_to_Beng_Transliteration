@@ -252,7 +252,7 @@ Subsequently, we extended the training of this model to 35 epochs, observing the
 
  So, based on this, the exact word-level accuracy is approximately 17.90% (1652 out of 9228 words were perfectly predicted).
 
-- All predictions have been saved in the [predictions_attention.html](https://github.com/saswataghosh66/Eng_to_Beng_Transliteration/blob/main/No_Attention/_predictions_vanilla.html) file.
+- All predictions have been saved in the [predictions_attention.html](https://github.com/saswataghosh66/Eng_to_Beng_Transliteration/blob/main/With_Attention/predictions_attention.html) file.
 
 
 
