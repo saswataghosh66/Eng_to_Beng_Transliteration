@@ -207,41 +207,52 @@ The W&B agent runs this function multiple times with different hyperparameters t
 
   This section of code performs inference using the best trained Seq2Seq model and then visualizes the model's transliteration performance at the character level.
 
+**Step 17:**
+
+  This code uses a trained Seq2Seq model with attention to transliterate Romanized Bengali words into Bengali script. The code generates attention heatmaps 
+  showing how the model aligns input words ("erao", "ezahar", "ejahar", "ekatabaddho", "eeraneo") with their predicted Bengali transliterations during inference.
+
+**Step 18:**
+
+  It runs inference on a list of Romanized Bengali words using a trained Seq2Seq model with attention, then visualizes the attention as connection lines (not 
+  heatmaps) between input and predicted output characters, where line thickness and opacity represent attention strength. The visualizations are logged to Weights 
+  & Biases (W&B).
+
 # **Result:**
 
  **Model Training and Evaluation Summary:**
 
 After conducting approximately 15 hyperparameter sweeps, we identified a model configuration that achieved the highest training accuracy of 86.33%(tokenwise) within 5 epochs.
- - embed_size = 128
- - hidden_size = 512
+ - embed_size = 256
+ - hidden_size = 128
  - encoder_layers = 3
- - decoder_layers = 2
- - cell_type = 'lstm'
- - batch_size = 16
- - num_epochs = 35
- - dropout = 0.2
- - beam_width= 5
- - learning_rate = 0.0001
+ - decoder_layers = 1
+ - cell_type = 'gru'
+ - batch_size = 64
+ - num_epochs = 5
+ - dropout = 0.0
+ - beam_width= 3
+ - learning_rate = 0.001
  - bidirectional = True
 
 Subsequently, we extended the training of this model to 35 epochs, observing the following performance metrics(Step 12 in the notebook):
 
- - Peak validation accuracy: 47.38% (achieved at epoch 35)
- - Final test accuracy: 47.74% (after 35 epochs) [It is a clear indication of overfitting.]
+ - Peak validation accuracy: 45.94% (achieved at epoch 35)
+ - Final test accuracy: 45.13% (after 35 epochs) 
 
 - After that, I calculated the exact word-level accuracy, which measures how many complete words the model predicted correctly without any character mismatch. The results are as follows:
 
   -  Prediction Accuracy Summary
       - Total Predictions: 9228
-         - ✅ 100% Match: 2024
-         - ✅ Above 75%: 1601
-         - ✅ Above 50%: 1580
-         - ✅ Above 25%: 1869
-         - ❌ ≤ 25% Match: 2154
+         - ✅ 100% Match: 1652
+         - ✅ Above 75%: 1548
+         - ✅ Above 50%: 1810
+         - ✅ Above 25%: 1949
+         - ❌ ≤ 25% Match: 2269
 
- So, based on this, the exact word-level accuracy is approximately 21.9% (2024 out of 9228 words were perfectly predicted).
+ So, based on this, the exact word-level accuracy is approximately 17.90% (1652 out of 9228 words were perfectly predicted).
 
-- All predictions have been saved in the [predictions_vanilla.html](https://github.com/saswataghosh66/Eng_to_Beng_Transliteration/blob/main/No_Attention/_predictions_vanilla.html) file.
+- All predictions have been saved in the [predictions_attention.html](https://github.com/saswataghosh66/Eng_to_Beng_Transliteration/blob/main/No_Attention/_predictions_vanilla.html) file.
 
 
 
