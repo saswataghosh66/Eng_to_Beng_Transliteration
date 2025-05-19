@@ -164,3 +164,36 @@ The W&B agent runs this function multiple times with different hyperparameters t
 
     - latin_idx2token: A dictionary mapping integer indices back to their corresponding Latin characters from the test input vocabulary.
     - bangla_idx2token: A dictionary mapping integer indices back to their corresponding Bengali characters from the test target vocabulary.
+
+**Step 14:**
+
+- Function decode_sequence:
+
+    - Takes a list of token indices (indices), a dictionary mapping indices to tokens (idx2token), and the target vocabulary dictionary (target_vocab).
+
+    - Filters out special tokens like padding (<pad>), start-of-sequence (<sos>), and end-of-sequence (<eos>) from the indices.
+
+    - Converts the remaining valid indices back to their corresponding characters using idx2token.
+
+    - Joins these characters into a single string.
+
+   - Returns the decoded string representing the original text sequence.
+
+**Step 15:**
+
+- Function process_output_indices:
+
+    - Takes a list of token indices (indices), a dictionary mapping indices to tokens (idx2token), and the target vocabulary dictionary (target_vocab).
+    - Iterates through each index in the sequence.
+    - Stops decoding when it encounters the end-of-sequence token (<eos>).
+    - Skips special tokens like padding (<pad>) and start-of-sequence (<sos>).
+    - Converts each valid index to its corresponding character using idx2token.
+    - Concatenates these characters to form the decoded string.
+    - Returns the decoded text representing the sequence up to the <eos> token.
+
+**Step 16:**
+
+  This section of code performs inference using the best trained Seq2Seq model and then visualizes the model's transliteration performance at the character level.
+
+
+
