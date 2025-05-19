@@ -66,12 +66,13 @@ The function returns the prepared dataset and dataloader along with the vocabula
   Defines the encoder module with an embedding layer and an RNN (LSTM/GRU/RNN). It supports multiple layers, dropout, and optional bidirectionality. Takes input 
   sequences and outputs hidden states.
 
-Decoder class:
+- Decoder class:
 
-  Defines the decoder module with an embedding layer, an RNN, and a linear layer to map hidden states to output vocabulary scores. It processes one step at a time, 
+  Defines the decoder module with an embedding layer, an RNN, and a linear layer to map hidden states to output vocabulary scores. It processes one step at a 
+  time, 
   taking previous token and hidden state as input.
 
-Seq2SeqModel class:
+- Seq2SeqModel class:
 
   Combines the encoder and decoder into a sequence-to-sequence model. Handles initialization of decoder hidden states, runs teacher forcing during training, and 
   supports beam search decoding for inference.
