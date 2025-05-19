@@ -10,7 +10,7 @@ I have loaded the file paths for the training, validation, and test datasets.
 
 **Step 2:**
 
-This function is responsible for loading and preprocessing the transliteration data from a specified file path. It follows a systematic approach:
+load_and_prepare_data function is responsible for loading and preprocessing the transliteration data from a specified file path. It follows a systematic approach:
 
 - The transliteration data is read from a TSV file into a pandas DataFrame. Any unnecessary columns (such as the third dummy column) and missing values are removed.
 - All input and target words are explicitly converted to string format, and the index of the DataFrame is reset.
@@ -30,7 +30,27 @@ These tensors are wrapped into a TensorDataset and a DataLoader, making them rea
 - The maximum lengths of the input and target sequences.
 
 **Step 3:**
+
  Loaded traiining data from traiining data path.
+
+**Step 4:**
+
+load_and_prepare_test_valid_data loads and preprocesses the validation or test transliteration data from a specified file path. It accepts existing input and target vocabularies as well as maximum sequence lengths, allowing consistent encoding between training and evaluation phases.
+
+The process involves:
+
+- Reading the TSV file into a pandas DataFrame and cleaning it by removing unnecessary columns and missing values.
+- Converting all words to strings and resetting the DataFrame index.
+- If vocabularies are not provided, building character-level vocabularies for both input (Roman script) and target (Bengali script) languages, including special 
+ tokens <pad>, <sos>, and <eos>.
+- Determining the maximum lengths of input and target sequences if not provided.
+- Encoding each input word into a fixed-length sequence of token IDs padded to the maximum input length.
+- Encoding each target word as a sequence with <sos> and <eos> tokens added at the beginning and end respectively, then padded to the maximum target length plus 2 
+  (for these special tokens).
+- Converting all sequences into PyTorch tensors.
+- Wrapping the tensors into a TensorDataset and DataLoader with the specified batch size for evaluation purposes.
+
+The function returns the prepared dataset and dataloader along with the vocabularies and maximum sequence lengths, ensuring compatibility with the training setup.
 
 
 
