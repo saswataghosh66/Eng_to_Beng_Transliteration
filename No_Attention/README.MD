@@ -229,6 +229,8 @@ Subsequently, we extended the training of this model to 35 epochs, observing the
 
  So, based on this, the exact word-level accuracy is approximately 21.9% (2024 out of 9228 words were perfectly predicted).
 
+- All predictions have been saved in the [predictions_vanilla.html] file.
+
 
 
 
