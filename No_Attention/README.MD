@@ -94,7 +94,73 @@ The function returns the prepared dataset and dataloader along with the vocabula
 
     Evaluates the model on validation/test data without teacher forcing. Computes loss and token-level accuracy excluding padding tokens. Returns average loss and 
     accuracy percentage.
- 
+
+**Step 7:**
+
+ - W&B Setup Code:
+
+     - Imports necessary libraries: wandb for experiment tracking, numpy and random for computations, and getpass for secure input.
+     - Uses getpass to securely prompt the user to enter their Weights & Biases (W&B) API key without showing it on the screen.
+     - Logs into W&B using the provided API key to enable experiment tracking and logging.
 
 
+ **Step 8:**
 
+- W&B Hyperparameter Sweep Configuration:
+
+     - Defines a Bayesian optimization sweep to find the best model hyperparameters.
+     - The goal is to maximize the validation accuracy (val_accuracy).
+     - Specifies ranges/values for key hyperparameters such as embedding size, dropout rate, number of encoder and decoder layers, hidden layer size, RNN cell 
+       type, bidirectionality, batch size, number of epochs, learning rate, and beam search width.
+     - Creates a sweep on the W&B platform under the project named 'DL_Translation', returning a sweep_id to identify this sweep.
+
+
+**Step 9:**
+
+- In the main function:
+    - Initializes a W&B run with current hyperparameters.
+    - Builds the Seq2Seq model using those hyperparameters.
+    - Sets loss function (CrossEntropy) and Adam optimizer.
+    - Loads training and validation data loaders.
+    - Runs training and validation for a fixed number of epochs.
+    - Logs training loss, validation loss, and validation accuracy to W&B each epoch.
+    - Prints progress to the console.
+
+The W&B agent runs this function multiple times with different hyperparameters to optimize the model.
+
+
+**Step 10:**
+
+   Here, I am building the architecture of my best model obtained from the W&B sweep. This model is a Seq2Seq neural network with an encoder and decoder, using 
+   the hyperparameters that gave the best performance during the W&B optimization. The encoder processes the input sequence with a specified number of layers, 
+   hidden size, embedding size, cell type (like GRU, LSTM, or RNN), and can be bidirectional. The decoder generates the output sequence using similar settings. 
+   Dropout is applied for regularization, and beam search decoding is included to improve inference results. This architecture reflects the optimized 
+   configuration from the W&B runs.
+
+**Step 11:**
+
+   Here, I trained my best model for up to 35 epochs, printing the training loss and accuracy, as well as the validation loss and accuracy, after each epoch.
+
+**Step 12:**
+
+   I evaluated my model on the test dataset.
+
+**Step 13:**
+
+- Function run_inference:
+
+    - Sets the model to evaluation mode to disable dropout and other training-specific behaviors.
+    - Iterates over the test dataloader without computing gradients.
+    - For each batch:
+       - Moves input (latin) and target (devanagari) tensors to the specified device (CPU/GPU).
+       - Runs the model to get output predictions with teacher forcing turned off (teacher_forcing_ratio=0).
+       - Converts target tensors to NumPy arrays and collects them as actual ground truth.
+       - Extracts the predicted token indices from the model output by applying argmax on the appropriate dimension.
+       - Converts both inputs and predicted outputs back to NumPy arrays.
+       - Appends tuples of input and predicted outputs to the predictions list.
+    - Returns the lists of predictions and actual targets for further analysis.
+
+- Vocab dictionaries:
+
+    - latin_idx2token: A dictionary mapping integer indices back to their corresponding Latin characters from the test input vocabulary.
+    - bangla_idx2token: A dictionary mapping integer indices back to their corresponding Bengali characters from the test target vocabulary.
