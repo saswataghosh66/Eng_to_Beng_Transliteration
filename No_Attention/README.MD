@@ -195,5 +195,43 @@ The W&B agent runs this function multiple times with different hyperparameters t
 
   This section of code performs inference using the best trained Seq2Seq model and then visualizes the model's transliteration performance at the character level.
 
+# **Result:**
+
+ **Model Training and Evaluation Summary:**
+
+After conducting approximately 15 hyperparameter sweeps, we identified a model configuration that achieved the highest training accuracy of 86.33%(tokenwise) within 5 epochs.
+ - embed_size = 128
+ - hidden_size = 512
+ - encoder_layers = 3
+ - decoder_layers = 2
+ - cell_type = 'lstm'
+ - batch_size = 16
+ - num_epochs = 35
+ - dropout = 0.2
+ - beam_width= 5
+ - learning_rate = 0.0001
+ - bidirectional = True
+
+Subsequently, we extended the training of this model to 35 epochs, observing the following performance metrics(Step 12 in the notebook):
+
+ - Peak validation accuracy: 47.38% (achieved at epoch 35)
+ - Final test accuracy: 47.74% (after 35 epochs) [It is a clear indication of overfitting.]
+
+- After that, I calculated the exact word-level accuracy, which measures how many complete words the model predicted correctly without any character mismatch. The results are as follows:
+
+  -  Prediction Accuracy Summary
+      - Total Predictions: 9228
+         - ✅ 100% Match: 2024
+         - ✅ Above 75%: 1601
+         - ✅ Above 50%: 1580
+         - ✅ Above 25%: 1869
+         - ❌ ≤ 25% Match: 2154
+ So, based on this, the exact word-level accuracy is approximately 21.9% (2024 out of 9228 words were perfectly predicted).
+
+
+
+
+
+
 
 
