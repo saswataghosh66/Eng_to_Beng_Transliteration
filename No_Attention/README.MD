@@ -13,31 +13,20 @@ I have loaded the file paths for the training, validation, and test datasets.
 This function is responsible for loading and preprocessing the transliteration data from a specified file path. It follows a systematic approach:
 
 - The transliteration data is read from a TSV file into a pandas DataFrame. Any unnecessary columns (such as the third dummy column) and missing values are removed.
-
 - All input and target words are explicitly converted to string format, and the index of the DataFrame is reset.
-
 - The maximum lengths of the input (Roman script) and target (Bengali script) words are calculated to enable uniform padding.
-
 - Character-level vocabularies are created for both the input and target languages. These vocabularies include three special tokens: <pad> (padding), <sos> (start of sequence), and <eos> (end of sequence).
-
 - Each word is encoded into a sequence of token IDs based on the corresponding vocabulary:
-
 - Input words are padded to the maximum input length.
-
 - Target words are padded to the maximum target length, with additional padding tokens added as needed.
-
 - The encoded sequences are converted into PyTorch tensors.
 
 These tensors are wrapped into a TensorDataset and a DataLoader, making them ready for use in training or evaluation.
 
 - The function returns the following:
-
 - The constructed TensorDataset,
-
 - The DataLoader for batching,
-
 - The input and target vocabularies (as dictionaries),
-
 - The maximum lengths of the input and target sequences.
 
 **Step 3:**
