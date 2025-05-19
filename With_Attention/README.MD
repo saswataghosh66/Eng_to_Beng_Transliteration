@@ -229,7 +229,6 @@ After conducting approximately 15 hyperparameter sweeps, we identified a model c
  - decoder_layers = 1
  - cell_type = 'gru'
  - batch_size = 64
- - num_epochs = 5
  - dropout = 0.0
  - beam_width= 3
  - learning_rate = 0.001
