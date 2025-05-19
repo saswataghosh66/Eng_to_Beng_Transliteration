@@ -55,7 +55,7 @@ The function returns the prepared dataset and dataloader along with the vocabula
 **step 5:**
 
   Loaded validation and test data from validation and test data path.
-  I used a different function to load the validation and test data because there were two Bengali characters missing from their vocabularies. Using the same 
+  - I used a different function to load the validation and test data because there were two Bengali characters missing from their vocabularies. Using the same 
   function as for training data could have caused issues due to these missing characters, so the separate function ensures proper handling of the vocabularies and 
   consistent encoding across datasets.
 
@@ -215,7 +215,7 @@ After conducting approximately 15 hyperparameter sweeps, we identified a model c
 Subsequently, we extended the training of this model to 35 epochs, observing the following performance metrics(Step 12 in the notebook):
 
  - Peak validation accuracy: 47.38% (achieved at epoch 35)
- - Final test accuracy: 47.74% (after 35 epochs) [It is a clear indication of overfitting.]
+ - Final test accuracy: 47.74% (after 35 epochs)
 
 - After that, I calculated the exact word-level accuracy, which measures how many complete words the model predicted correctly without any character mismatch. The results are as follows:
 
